@@ -1,3 +1,4 @@
+# typed: ignore
 # frozen_string_literal: true
 
 # rubocop:disable Metrics/BlockLength
@@ -13,7 +14,7 @@ Place        = SchemaDotOrg::Place
 PostalAddress = SchemaDotOrg::PostalAddress
 
 RSpec.describe Organization do
-  describe "#new" do
+  describe '#new' do
     it 'will not create with an unknown attribute' do
       expect do
         Organization.new(
@@ -49,15 +50,15 @@ RSpec.describe Organization do
       )
 
       expect(public_law.to_json_struct).to eq(
-        "@type" => "Organization",
-        'name' => "Public.Law",
-        'email' => "say_hi@public.law",
-        'url' => "https://www.public.law",
-        'logo' => "https://www.public.law/favicon-196x196.png",
-        'foundingDate' => "2009-03-06",
+        '@type' => 'Organization',
+        'name' => 'Public.Law',
+        'email' => 'say_hi@public.law',
+        'url' => 'https://www.public.law',
+        'logo' => 'https://www.public.law/favicon-196x196.png',
+        'foundingDate' => '2009-03-06',
         'founder' => {
-          "@type" => "Person",
-          'name' => "Robb Shecter"
+          '@type' => 'Person',
+          'name' => 'Robb Shecter'
         },
         'foundingLocation' => {
           "@type" => "Place",

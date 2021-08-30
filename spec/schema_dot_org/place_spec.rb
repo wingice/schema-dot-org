@@ -1,3 +1,4 @@
+# typed: ignore
 # frozen_string_literal: true
 
 require 'spec_helper'
@@ -7,7 +8,7 @@ RSpec.describe SchemaDotOrg::Place do # rubocop:disable Metrics/BlockLength
   let(:postal_address) { SchemaDotOrg::PostalAddress.new(street_address: '3300 Bloor Street') }
   let(:home) { SchemaDotOrg::Place.new(address: postal_address) }
 
-  describe "#new" do
+  describe '#new' do
     it 'will not create a Place without an address' do
       expect { SchemaDotOrg::Place.new }.to raise_error(ArgumentError)
     end
@@ -26,8 +27,8 @@ RSpec.describe SchemaDotOrg::Place do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  describe "#to_json_struct" do
-    it "has exactly the correct attributes and values" do
+  describe '#to_json_struct' do
+    it 'has exactly the correct attributes and values' do
       expect(home.to_json_struct).to eq(
         '@type' => 'Place',
         'address' => postal_address.to_json_struct
