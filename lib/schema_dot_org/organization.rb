@@ -32,9 +32,9 @@ module SchemaDotOrg
         'email' => email,
         'url' => url,
         'logo' => logo,
-        'founder' => founder.to_json_struct,
-        'foundingDate' => founding_date.to_s,
-        'foundingLocation' => founding_location.to_json_struct,
+        'founder' => founder&.to_json_struct,
+        'foundingDate' => founding_date&.to_s,
+        'foundingLocation' => founding_location&.to_json_struct,
         'sameAs' => same_as
       }
     end

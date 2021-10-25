@@ -39,7 +39,7 @@ module SchemaDotOrg
         'identifier' => identifier&.to_json_struct,
         'title' => title,
         'validThrough' => valid_through&.iso8601
-      }
+      } 
 
       if job_location_type == 'TELECOMMUTE'
         struct.merge('jobLocationType' => job_location_type)
