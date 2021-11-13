@@ -38,14 +38,10 @@ module SchemaDotOrg
         'hiringOrganization' => hiring_organization.to_json_struct,
         'identifier' => identifier&.to_json_struct,
         'title' => title,
-        'validThrough' => valid_through&.iso8601
+        'validThrough' => valid_through&.iso8601,
+        'jobLocation' => job_locations
       } 
-
-      if job_location_type == 'TELECOMMUTE'
-        struct.merge('jobLocationType' => job_location_type)
-      else
-        struct.merge('jobLocation' => job_locations)
-      end
+      struct.merge('jobLocationType' => job_location_type) if job_location_type == 'TELECOMMUTE'
     end
 
     private
