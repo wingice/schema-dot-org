@@ -48,7 +48,7 @@ module SchemaDotOrg
       struct.merge!('jobLocationType' => job_location_type) if job_location_type == 'TELECOMMUTE'
       
       locations = location_data
-      struct.merge!('jobLocation' => locations) unless loctions.empty?
+      struct.merge!('jobLocation' => locations) unless locations.empty?
     end
 
     def location_data
