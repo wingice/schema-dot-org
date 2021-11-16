@@ -47,8 +47,14 @@ module SchemaDotOrg
       } 
       struct.merge!('jobLocationType' => job_location_type) if job_location_type == 'TELECOMMUTE'
       
-      locations = job_location.select{|p| p.address_country.present?}.map(&:to_json_struct)
+      locations = location_data
       struct.merge!('jobLocation' => locations) unless loctions.empty?
+    end
+
+    def location_data
+      (job_location || []).map do |p|
+        p.respond_to?(:to_json_struct)? p.to_json_struct : p.to_s
+      end.reject(&:blank?)
     end
   end
 end
