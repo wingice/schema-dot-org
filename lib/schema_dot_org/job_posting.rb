@@ -16,7 +16,9 @@ module SchemaDotOrg
                   :job_location,
                   :job_location_type,
                   :title,
-                  :valid_through
+                  :valid_through,
+                  :direct_apply
+    
 
     validates :date_posted,         type: Date, presence: true
     validates :description,         type: String, presence: true
@@ -28,6 +30,7 @@ module SchemaDotOrg
     validates_presence_of :job_location, unless: -> jp { jp.job_location_type == 'TELECOMMUTE' }
     validates :title,               type: String, presence: true
     validates :valid_through,       type: DateTime, allow_nil: true
+    validates :direct_apply,        type: Boolean
 
 
     def _to_json_struct
@@ -39,15 +42,13 @@ module SchemaDotOrg
         'identifier' => identifier&.to_json_struct,
         'title' => title,
         'validThrough' => valid_through&.iso8601,
-        'jobLocation' => job_locations
+        
+        'directApply' => direct_apply
       } 
-      struct.merge('jobLocationType' => job_location_type) if job_location_type == 'TELECOMMUTE'
-    end
-
-    private
-
-    def job_locations
-      job_location.map(&:to_json_struct)
+      struct.merge!('jobLocationType' => job_location_type) if job_location_type == 'TELECOMMUTE'
+      
+      locations = job_location.select{|p| p.address_country.present?}.map(&:to_json_struct)
+      struct.merge!('jobLocation' => locations) unless loctions.empty?
     end
   end
 end
