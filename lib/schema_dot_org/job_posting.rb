@@ -49,6 +49,7 @@ module SchemaDotOrg
       
       locations = location_data
       struct.merge!('jobLocation' => locations) unless locations.empty?
+      struct
     end
 
     def location_data
