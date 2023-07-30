@@ -1,8 +1,7 @@
-# typed: ignore
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'schema_dot_org/place'
+require 'schema_dot_org'
 
 RSpec.describe SchemaDotOrg::Place do # rubocop:disable Metrics/BlockLength
   let(:postal_address) { SchemaDotOrg::PostalAddress.new(street_address: '3300 Bloor Street') }
@@ -20,7 +19,11 @@ RSpec.describe SchemaDotOrg::Place do # rubocop:disable Metrics/BlockLength
     it 'will not create a Place with an unknown attribute' do
       expect do
         SchemaDotOrg::Place.new(
+<<<<<<< HEAD
           address: postal_address,
+=======
+          address: '12345 Happy Street',
+>>>>>>> dogweather/master
           author: 'Hemmingway'
         )
       end.to raise_error(NoMethodError)
