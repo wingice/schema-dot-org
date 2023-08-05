@@ -19,11 +19,7 @@ RSpec.describe SchemaDotOrg::Place do # rubocop:disable Metrics/BlockLength
     it 'will not create a Place with an unknown attribute' do
       expect do
         SchemaDotOrg::Place.new(
-<<<<<<< HEAD
           address: postal_address,
-=======
-          address: '12345 Happy Street',
->>>>>>> dogweather/master
           author: 'Hemmingway'
         )
       end.to raise_error(NoMethodError)

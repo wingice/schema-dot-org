@@ -11,7 +11,8 @@ RSpec.describe SchemaDotOrg::JobPosting do # rubocop:disable Metrics/BlockLength
       description: description,
       hiring_organization: hiring_organization,
       job_location: [job_location],
-      title: title
+      title: title,
+      direct_apply: false
     }
   end
 
@@ -83,6 +84,7 @@ RSpec.describe SchemaDotOrg::JobPosting do # rubocop:disable Metrics/BlockLength
                                               '@type' => 'JobPosting',
                                               'datePosted' => date_posted.iso8601,
                                               'description' => description,
+                                              'directApply' => false,
                                               'hiringOrganization' => hiring_organization.to_json_struct,
                                               'jobLocationType' => job_location_type,
                                               'applicantLocationRequirements' => applicant_location_requirements.to_json_struct,
@@ -102,6 +104,7 @@ RSpec.describe SchemaDotOrg::JobPosting do # rubocop:disable Metrics/BlockLength
                                               '@type' => 'JobPosting',
                                               'datePosted' => date_posted.iso8601,
                                               'description' => description,
+                                              'directApply' => false,
                                               'hiringOrganization' => hiring_organization.to_json_struct,
                                               'jobLocation' => [job_location.to_json_struct],
                                               'title' => title,
@@ -118,7 +121,7 @@ RSpec.describe SchemaDotOrg::JobPosting do # rubocop:disable Metrics/BlockLength
       it 'generates the expected string' do
         expect(SchemaDotOrg::JobPosting.new(fields).to_json).to eq "{\"@type\":\"JobPosting\",\"datePosted\":\"#{date_posted}\",\
 \"description\":\"#{description}\",\"employmentType\":#{employment_type.to_json},\"hiringOrganization\":#{hiring_organization.to_json},\
-\"identifier\":#{identifier.to_json},\"title\":\"#{title}\",\"validThrough\":\"#{valid_through}\",\"jobLocationType\":\"#{job_location_type}\",\
+\"identifier\":#{identifier.to_json},\"title\":\"#{title}\",\"validThrough\":\"#{valid_through}\",\"directApply\":false,\"jobLocationType\":\"#{job_location_type}\",\
 \"applicantLocationRequirements\":#{applicant_location_requirements.to_json}}"
       end
     end
@@ -129,7 +132,7 @@ RSpec.describe SchemaDotOrg::JobPosting do # rubocop:disable Metrics/BlockLength
       it 'generates the expected string' do
         expect(SchemaDotOrg::JobPosting.new(fields).to_json).to eq "{\"@type\":\"JobPosting\",\"datePosted\":\"#{date_posted}\",\
 \"description\":\"#{description}\",\"employmentType\":#{employment_type.to_json},\"hiringOrganization\":#{hiring_organization.to_json},\
-\"identifier\":#{identifier.to_json},\"title\":\"#{title}\",\"validThrough\":\"#{valid_through}\",\"jobLocation\":[#{job_location.to_json}]}"
+\"identifier\":#{identifier.to_json},\"title\":\"#{title}\",\"validThrough\":\"#{valid_through}\",\"directApply\":false,\"jobLocation\":[#{job_location.to_json}]}"
       end
     end
   end
@@ -140,7 +143,7 @@ RSpec.describe SchemaDotOrg::JobPosting do # rubocop:disable Metrics/BlockLength
         expect(SchemaDotOrg::JobPosting.new(fields).to_json_ld).to eq "<script type=\"application/ld+json\">\n{\"@context\":\"http://schema.org\",\
 \"@type\":\"JobPosting\",\"datePosted\":\"#{date_posted}\",\"description\":\"#{description}\",\
 \"employmentType\":#{employment_type.to_json},\"hiringOrganization\":#{hiring_organization.to_json},\
-\"identifier\":#{identifier.to_json},\"title\":\"#{title}\",\"validThrough\":\"#{valid_through}\",\
+\"identifier\":#{identifier.to_json},\"title\":\"#{title}\",\"validThrough\":\"#{valid_through}\",\"directApply\":false,\
 \"jobLocationType\":\"#{job_location_type}\",\
 \"applicantLocationRequirements\":#{applicant_location_requirements.to_json}}\n</script>"
       end
@@ -153,7 +156,7 @@ RSpec.describe SchemaDotOrg::JobPosting do # rubocop:disable Metrics/BlockLength
         expect(SchemaDotOrg::JobPosting.new(fields).to_json_ld).to eq "<script type=\"application/ld+json\">\n{\"@context\":\"http://schema.org\",\
 \"@type\":\"JobPosting\",\"datePosted\":\"#{date_posted}\",\"description\":\"#{description}\",\
 \"employmentType\":#{employment_type.to_json},\"hiringOrganization\":#{hiring_organization.to_json},\
-\"identifier\":#{identifier.to_json},\"title\":\"#{title}\",\"validThrough\":\"#{valid_through}\",\
+\"identifier\":#{identifier.to_json},\"title\":\"#{title}\",\"validThrough\":\"#{valid_through}\",\"directApply\":false,\
 \"jobLocation\":[#{job_location.to_json}]}\n</script>"
       end
     end
